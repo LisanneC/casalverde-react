@@ -8,7 +8,7 @@ class PagesContainer extends PureComponent {
 
   render() {
     return(
-      <div className="pages wrapper">
+      <div className="Pages wrapper">
         <header>
           <Title content="Pages" />
         </header>
