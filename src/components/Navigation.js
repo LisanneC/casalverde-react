@@ -22,7 +22,7 @@ class BottomNavigationExampleSimple extends Component {
     selectedIndex: 0,
   };
 
-  select = (index) => this.setState({selectedIndex: index});
+  select = (index) => this.props.updateMenuItem(index);
 
   render() {
     return (

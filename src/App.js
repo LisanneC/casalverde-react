@@ -1,46 +1,41 @@
 import React, { PureComponent, PropTypes } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Title from './components/Title'
+import Navigation from './components/Navigation';
+import AdminContainer from './pages/AdminContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/themes'
-import AdminContainer from './pages/AdminContainer'
-import Comment from './components/Comment'
-import DatePicker from './components/DatePicker'
-import Navigation from './components/Navigation'
-import TextField from './components/TextField'
 
-const pages = [
-  {
-    title: 'hoi',
-    text: 'even kijken of dit werkt'
-  },
-]
-
+import './App.css';
 
 class App extends PureComponent {
-    static childContextTypes = {
-    muiTheme: PropTypes.object.isRequired,
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedMenuItem: 0,
+    }
   }
 
-getChildContext() {
-return { muiTheme }
-}
+  setMenuItem(menuNumber){
+    this.setState({
+      selectedMenuItem: menuNumber,
+    })
+  }
 
   render() {
     return (
-    <MuiThemeProvider muiTheme={muiTheme}>
       <div>
-          <Navigation /> <br/>
-          <DatePicker /> <br/>
-          <TextField /> <br/>
-         <AdminContainer pages={ pages } />
-         <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 1"/> </Comment>
-         <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 2"/> </Comment>
-         <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 3"/> </Comment>
+          <Navigation updateMenuItem={this.setMenuItem.bind(this)}/> <br/>
+          {this.renderContent()}
       </div>
-    </MuiThemeProvider>
     );
+  }
+
+  renderContent() {
+    switch (this.state.selectedMenuItem){
+      case 0: 
+        return <AdminContainer  />;
+      default:
+        return '';
+    } 
   }
 }
 

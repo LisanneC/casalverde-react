@@ -1,1 +1,5 @@
-export default {} // empty for now!
+import homePageReducer from './homePageReducer';
+
+export default {
+    homePageContent: homePageReducer
+}
