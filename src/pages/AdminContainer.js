@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import Title from '../components/Title'
 
-class PagesContainer extends PureComponent {
+class AdminContainer extends PureComponent {
   renderPage(page, index) {
     return null
   }
@@ -10,7 +10,7 @@ class PagesContainer extends PureComponent {
     return(
       <div className="Pages wrapper">
         <header>
-          <Title content="Pages" />
+          <Title content="Admin" />
         </header>
 
         <main>
@@ -21,4 +21,4 @@ class PagesContainer extends PureComponent {
   }
 }
 
-export default PagesContainer
+export default AdminContainer
