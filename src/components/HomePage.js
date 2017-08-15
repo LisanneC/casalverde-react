@@ -3,9 +3,9 @@ import TextField from 'material-ui/TextField';
 
 const HomePage = ({edit, content}) => {
     return (
-        <div>
+        <div className='homepage'>
         { edit ? 
-            <div> 
+            <div className='form'> 
                 <img src={content.image} />
                 <div>
                     <TextField defaultValue={content.title} />
