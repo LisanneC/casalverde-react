@@ -4,8 +4,8 @@ import './App.css';
 import Title from './components/Title'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/themes'
-import PagesContainer from './pages/PagesContainer'
-import Comment from './pages/Comment'
+import AdminContainer from './pages/AdminContainer'
+import Comment from './components/Comment'
 
 const pages = [
   {
@@ -21,7 +21,7 @@ class App extends PureComponent {
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
 
-         <PagesContainer pages={ pages } />
+         <AdminContainer pages={ pages } />
          <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 1"/> </Comment>
          <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 2"/> </Comment>
          <Comment> <input type="text" ref="Paragraph" placeholder="Paragraph 3"/> </Comment>
