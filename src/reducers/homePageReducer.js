@@ -10,7 +10,7 @@ const initialState = homePageContent;
 export default (state = initialState, { type, payload } = {}) => {
   switch(type) {
     case 'LOAD_HOMEPAGE' :
-        return [Object.assign({}, payload)].concat(state);
+        return Object.assign({}, state, payload);
     default :
         return state;
   }
