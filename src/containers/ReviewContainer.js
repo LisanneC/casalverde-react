@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
 import ReviewPage from '../components/ReviewPage';
+import ImageUploader from '../components/ImageUploader';
 
 
 class ReviewContainer extends PureComponent {
@@ -21,6 +22,7 @@ class ReviewContainer extends PureComponent {
         <main>
           <ReviewPage edit={this.state.edit} content={this.props.reviewPageContent} />
           <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
+          <ImageUploader />
         </main>
       </div>
     )

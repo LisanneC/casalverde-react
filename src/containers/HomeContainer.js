@@ -3,6 +3,7 @@ import Title from '../components/Title';
 import {connect} from 'react-redux';
 import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
+import ImageUploader from '../components/ImageUploader';
 
 
 class HomeContainer extends PureComponent {
@@ -18,6 +19,7 @@ class HomeContainer extends PureComponent {
     return(
       <div className="Pages wrapper">
         <main>
+          <ImageUploader />
           <HomePage edit={this.state.edit} content={this.props.homePageContent} />
           <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
         </main>
@@ -43,4 +45,4 @@ class HomeContainer extends PureComponent {
 
 const mapStateToProps = ({homePageContent}) => ({homePageContent})
 
-export default connect(mapStateToProps)(HomeContainer); 
+export default connect(mapStateToProps)(HomeContainer);
