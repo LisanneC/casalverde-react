@@ -22,3 +22,18 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.homepage img {
+  width: 100%;
+}
+
+.pricepage img {
+  width: 100%;
+}
+
+.homepage input {
+  width: 100%!important;
+}
+.form > div > div {
+  width: 100%!important;
+}

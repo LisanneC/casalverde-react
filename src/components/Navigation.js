@@ -18,16 +18,13 @@ const booking = <Event />
 const addPage = <NoteAdd />
 
 class BottomNavigationExampleSimple extends Component {
-  state = {
-    selectedIndex: 0,
-  };
 
-  select = (index) => this.setState({selectedIndex: index});
+  select = (index) => this.props.updateMenuItem(index);
 
   render() {
     return (
       <Paper zDepth={1}>
-        <BottomNavigation selectedIndex={this.state.selectedIndex}>
+        <BottomNavigation selectedIndex={this.props.selectedItem}>
           <BottomNavigationItem
             label="Home Page"
             icon={actionHome}

@@ -4,7 +4,7 @@ import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 import App from './App'
 import Title from './components/Title'
-import PagesContainer from './pages/PagesContainer'
+import HomeContainer from './containers/HomeContainer'
 
 chai.use(chaiEnzyme())
 
@@ -18,7 +18,7 @@ describe('<App />', () => {
   it('sets the Title to "Hello Admin"', () => {
     expect(app).to.contain(<Title content="Hello Admin" />)
 
-  it('contains the PagesContainer', () => {
-    expect(app).to.have.descendants(PagesContainer)
+  it('contains the HomeContainer', () => {
+    expect(app).to.have.descendants(HomeContainer)
   })
 })
