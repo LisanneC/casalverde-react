@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
 import BookingPage from '../components/BookingPage';
+import ImageUploader from '../components/ImageUploader';
 
 
 class BookingContainer extends PureComponent {
@@ -19,6 +20,7 @@ class BookingContainer extends PureComponent {
     return(
       <div className="Pages wrapper">
         <main>
+          <ImageUploader />
           <BookingPage edit={this.state.edit} content={this.props.bookingPageContent} />
           <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
         </main>
