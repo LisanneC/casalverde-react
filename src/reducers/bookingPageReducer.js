@@ -10,11 +10,11 @@ const bookingPageContent = {
     street_name: 'SomeStreet',
     street_number: '34',
     city: 'Groningen',
-    zip_code: '2213TK',
+    zip_code: '2213 TK',
     people: 4,
     total_price: 2345.45,
-    confirmed: false,
-    paid: false
+    confirmed: 'false',
+    paid: 'false',
 }
 
 const initialState = bookingPageContent;
