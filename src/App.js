@@ -2,6 +2,8 @@ import React, { PureComponent, PropTypes } from 'react';
 import Navigation from './components/Navigation';
 import HomeContainer from './containers/HomeContainer';
 import PriceContainer from './containers/PriceContainer';
+import ReviewContainer from './containers/ReviewContainer';
+import BookingContainer from './containers/BookingContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/themes'
 
@@ -35,7 +37,11 @@ class App extends PureComponent {
       case 0:
         return <HomeContainer  />;
       case 1:
-        return <PriceContainer />
+        return <PriceContainer />;
+      case 2:
+        return <ReviewContainer />;
+      case 4:
+        return <BookingContainer />;
       default:
         return '';
     }
