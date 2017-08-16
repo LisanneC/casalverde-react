@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import Navigation from './components/Navigation';
-import AdminContainer from './pages/AdminContainer';
+import HomeContainer from './containers/HomeContainer';
+import PriceContainer from './containers/PriceContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/themes'
 
@@ -31,11 +32,13 @@ class App extends PureComponent {
 
   renderContent() {
     switch (this.state.selectedMenuItem){
-      case 0: 
-        return <AdminContainer  />;
+      case 0:
+        return <HomeContainer  />;
+      case 1:
+        return <PriceContainer />
       default:
         return '';
-    } 
+    }
   }
 }
 

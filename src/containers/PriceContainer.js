@@ -3,9 +3,10 @@ import Title from '../components/Title';
 import {connect} from 'react-redux';
 import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
+import PricePage from '../components/PricePage';
 
 
-class AdminContainer extends PureComponent {
+class PriceContainer extends PureComponent {
   constructor(props){
     super(props);
     this.state = {
@@ -18,7 +19,7 @@ class AdminContainer extends PureComponent {
     return(
       <div className="Pages wrapper">
         <main>
-          <HomePage edit={this.state.edit} content={this.props.homePageContent} />
+          <PricePage edit={this.state.edit} content={this.props.pricePageContent} />
           <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
         </main>
       </div>
@@ -41,6 +42,6 @@ class AdminContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = ({homePageContent}) => ({homePageContent})
+const mapStateToProps = ({pricePageContent}) => ({pricePageContent})
 
-export default connect(mapStateToProps)(AdminContainer); 
+export default connect(mapStateToProps)(PriceContainer);

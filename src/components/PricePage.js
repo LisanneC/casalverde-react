@@ -1,9 +1,9 @@
 import * as React from 'react';
 import TextField from 'material-ui/TextField';
 
-const HomePage = ({edit, content}) => {
+const PricePage = ({edit, content}) => {
     return (
-        <div className='homepage'>
+        <div className='pricepage'>
         { edit ?
             <div className='form'>
                 <img src={content.image} />
@@ -33,4 +33,4 @@ const HomePage = ({edit, content}) => {
     )
 }
 
-export default HomePage;
+export default PricePage;
