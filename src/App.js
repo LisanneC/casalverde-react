@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import HomeContainer from './containers/HomeContainer';
 import PriceContainer from './containers/PriceContainer';
 import ReviewContainer from './containers/ReviewContainer';
+import PhotoContainer from './containers/PhotoContainer';
 import BookingContainer from './containers/BookingContainer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './assets/styles/themes';
@@ -43,10 +44,10 @@ class App extends PureComponent {
         return <PriceContainer />;
       case 2:
         return <ReviewContainer />;
+      case 3:
+        return <PhotoContainer />;
       case 4:
         return <BookingContainer />;
-      case 3:
-        // return <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing />
       default:
         return '';
     }

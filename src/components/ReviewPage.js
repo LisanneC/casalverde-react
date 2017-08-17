@@ -20,13 +20,21 @@ const ReviewPage = ({edit, content}) => {
             </div>
         :
             <div>
-                 {content.name} 
-                <h1>
-                    {content.stars}
-                </h1>
-                <div>
-                    {content.review}
-                </div>
+                {content.map((item, i) => {
+                  return (
+                    <div id={i}>
+                      <div>
+                        {item.name}
+                      </div>
+                      <h1>
+                        {item.stars}
+                      </h1>
+                      <div>
+                        {item.review}
+                      </div>
+                    </div>
+                  )
+                })}
             </div>
         }
         </div>
