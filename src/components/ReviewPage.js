@@ -3,10 +3,11 @@ import TextField from 'material-ui/TextField';
 
 const ReviewPage = ({edit, content}) => {
     return (
+
         <div className='reviewpage'>
         { edit ?
             <div className='form'>
-                <TextField defaultValue={content.name} />
+                <TextField defaultValue={content.name} placeholder='First name' floatingLabelText='First name'/>
                 <div>
                     <TextField defaultValue={content.stars} />
                 </div>
