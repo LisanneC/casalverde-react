@@ -10,48 +10,50 @@ import muiTheme from './assets/styles/themes';
 import ImageUploader from './components/ImageUploader';
 import ReactPlayer from './components/ReactPlayer';
 
-
 import './App.css';
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedMenuItem: 0,
-    }
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedMenuItem: 0
+		};
+	}
 
-  setMenuItem(menuNumber){
-    this.setState({
-      selectedMenuItem: menuNumber,
-    })
-  }
+	setMenuItem(menuNumber) {
+		this.setState({
+			selectedMenuItem: menuNumber
+		});
+	}
 
-  render() {
-    return (
-      <div>
-          <Navigation selectedItem={this.state.selectedMenuItem} updateMenuItem={this.setMenuItem.bind(this)}/>
-          {this.renderContent()}
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div>
+				<Navigation
+					selectedItem={this.state.selectedMenuItem}
+					updateMenuItem={this.setMenuItem.bind(this)}
+				/>
+				{this.renderContent()}
+			</div>
+		);
+	}
 
-  renderContent() {
-    switch (this.state.selectedMenuItem){
-      case 0:
-        return <HomeContainer  />;
-      case 1:
-        return <PriceContainer />;
-      case 2:
-        return <ReviewContainer />;
-      case 3:
-        return <PhotoContainer />;
-      case 4:
-        return <BookingContainer />;
-      default:
-        return '';
-    }
-  }
+	renderContent() {
+		switch (this.state.selectedMenuItem) {
+			case 0:
+				return <HomeContainer />;
+			case 1:
+				return <PriceContainer />;
+			case 2:
+				return <ReviewContainer />;
+			case 3:
+				return <PhotoContainer />;
+			case 4:
+				return <BookingContainer />;
+			default:
+				return '';
+		}
+	}
 }
 
 export default App;
