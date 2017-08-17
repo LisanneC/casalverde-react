@@ -19,7 +19,7 @@ const HomePage = ({edit, header, parafs, handleOnChange}) => {
                                 multiLine={true} rows={3} placeholder='Text' floatingLabelText='Text'
                             />
                         );
-                    })};
+                    })}
                 </div>
 
             </div>

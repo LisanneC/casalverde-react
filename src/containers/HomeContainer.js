@@ -41,10 +41,11 @@ class HomeContainer extends PureComponent {
 
   handleOnChange(event, contentPart) {
     let obj = {};
-    let parafs = this.state.parafs;
+    let parafs = Object.assign([],this.state.parafs);
     if(this.isNumber(contentPart)){
-      obj = {text: event.target.value};
+      obj.text =  event.target.value;
       parafs[contentPart] = obj;
+      parafs[contentPart].id = this.state.parafs[contentPart].id;
       this.setState({parafs});
     }else {
       obj[contentPart] = event.target.value;
@@ -74,11 +75,9 @@ class HomeContainer extends PureComponent {
   loadHomeContent() {
     
     let url = 'http://localhost:3000/admin/pages/5/paragraphs.json'
-    let data;
     fetch(url)
     .then((resp) => resp.json()) 
     .then(function(data) {
-      data = data;
       this.updateState(data);
     }.bind(this));
   
@@ -90,7 +89,7 @@ class HomeContainer extends PureComponent {
       if (item.heading){
         this.setState({header: item.heading});
       }
-      parafs.push({text: item.text});
+      parafs.push({text: item.text, id: item.id});
     });
     this.setState({parafs});
   }
