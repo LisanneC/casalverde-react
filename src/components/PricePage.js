@@ -8,28 +8,28 @@ const PricePage = ({edit, content}) => {
             <div className='form'>
                 <img src={content.image} />
                 <div>
-                    <TextField defaultValue={content.start_date} />
+                    <TextField defaultValue={content.start_date} placeholder='Start date' floatingLabelText='Start date '/>
                 </div>
                 <div>
                     <TextField
                         defaultValue={content.end_date}
-                        multiLine={true}
+                       placeholder='End date' floatingLabelText='End date'
                     />
                 </div>
                 <div>
-                    <TextField defaultValue={content.min_days} />
+                    <TextField defaultValue={content.min_days} placeholder='Minimum days' floatingLabelText='Minimum days'/>
                 </div>
                 <div>
-                    <TextField defaultValue={content.nightly_price} />
+                    <TextField defaultValue={content.nightly_price} placeholder='Nightly price' floatingLabelText='Nighty price'/>
                 </div>
                 <div>
-                    <TextField defaultValue={content.extra_price} />
+                    <TextField defaultValue={content.extra_price} placeholder='Extra price' floatingLabelText='Extra price' />
                 </div>
                 <div>
-                    <TextField defaultValue={content.saturdays_only} />
+                    <TextField defaultValue={content.saturdays_only} placeholder='Saturdays only' floatingLabelText='Saturdays only'/>
                 </div>
                 <div>
-                    <TextField defaultValue={content.service_cost} />
+                    <TextField defaultValue={content.service_cost} placeholder='Service costs' floatingLabelText='Service costs'/>
                 </div>
             </div>
         :
