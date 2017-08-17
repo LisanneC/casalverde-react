@@ -14,7 +14,7 @@ const reviewPageContent =
   review: "It was the most impressive location I've ever been to.",
  }]
 
-const initialState = reviewPageContent
+const initialState = []
 
 export default (state = initialState, { type, payload } = {}) => {
   switch(type) {

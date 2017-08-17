@@ -13,8 +13,7 @@ class HomeContainer extends PureComponent {
     this.state = {
       edit: false,
       buttonName: 'Edit',
-      header: '',
-      parafs: [],
+      content: {}
     }
   }
 
@@ -29,8 +28,7 @@ class HomeContainer extends PureComponent {
           <ImageUploader />
           <HomePage
               edit={this.state.edit}
-              header={this.state.header}
-              parafs={this.state.parafs} // this.state.content
+              content={this.props.homePageContent} // this.state.content
               handleOnChange={this.handleOnChange.bind(this)}
           />
           <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
@@ -41,19 +39,8 @@ class HomeContainer extends PureComponent {
 
   handleOnChange(event, contentPart) {
     let obj = {};
-    let parafs = this.state.parafs;
-    if(this.isNumber(contentPart)){
-      obj = {text: event.target.value};
-      parafs[contentPart] = obj;
-      this.setState({parafs});
-    }else {
-      obj[contentPart] = event.target.value;
-      this.setState(obj);
-    }
-  }
-  
-  isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
+    obj[contentPart] = event.target.value;
+    this.setState(obj);
   }
 
   handleOnClick() {
@@ -63,6 +50,8 @@ class HomeContainer extends PureComponent {
         buttonName: 'Edit'
       });
       this.saveHomeContent();
+
+      // ipv dispatch wil je een fetch naar api endpoint.
     }else {
       this.setState({
         edit: true,
@@ -72,38 +61,25 @@ class HomeContainer extends PureComponent {
   }
 
   loadHomeContent() {
-    
-    let url = 'http://localhost:3000/admin/pages/5/paragraphs.json'
-    let data;
-    fetch(url)
-    .then((resp) => resp.json()) 
-    .then(function(data) {
-      data = data;
-      this.updateState(data);
-    }.bind(this));
-  
-  }
+    hier zet je de code waarmee je je data ophaalt vanuit je api endpoint;
 
-  updateState(data){
-    let parafs = [];
-    data.map(item => {
-      if (item.heading){
-        this.setState({header: item.heading});
-      }
-      parafs.push({text: item.text});
-    });
-    this.setState({parafs});
+    let url = '/admin//pages/1/paragraphs.json'
+    fetch(url)
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+      this.setState({
+        content: data
+      });
+      })
   }
 
   saveHomeContent() {
 
-    // let homeContent = {
-    //     title: this.state.title,
-    //     text: this.state.text
-    //   }
-    // this.props.dispatch(saveHomeContent(homeContent));
-
-    console.log('saveHomeContent', this.state.parafs);
+    let homeContent = {
+        title: this.state.title,
+        text: this.state.text
+      }
+    this.props.dispatch(saveHomeContent(homeContent));
 
 
     const url = 'http://localhost:3000/admin/reviews.json';

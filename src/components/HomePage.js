@@ -1,32 +1,34 @@
 import * as React from 'react';
 import TextField from 'material-ui/TextField';
 
-const HomePage = ({edit, content, handleOnChange}) => {
+const HomePage = ({edit, header, parafs, handleOnChange}) => {
     return (
         <div className='homepage'>
         { edit ?
             <div className='form'>
                 <div>
-                    <TextField id="title" defaultValue={content.heading} onChange={(e)=> handleOnChange(e, 'title')} placeholder='Heading' floatingLabelText='Heading'/>
+                    <TextField id="title" defaultValue={header} onChange={(e)=> handleOnChange(e, 'header')} placeholder='Heading' floatingLabelText='Heading'/>
                 </div>
                 <div>
-                    <TextField
-                        id="text"
-                        onChange={(e)=> handleOnChange(e, 'text')}
-                        defaultValue={content.text}
-                        multiLine={true} rows={3} placeholder='Text' floatingLabelText='Text'
-                    />
+                    {parafs.map((item, i) => {
+                        return (
+                            <TextField
+                                id="text"
+                                onChange={(e)=> handleOnChange(e, i)}
+                                defaultValue={item.text}
+                                multiLine={true} rows={3} placeholder='Text' floatingLabelText='Text'
+                            />
+                        );
+                    })};
                 </div>
 
             </div>
         :
             <div>
                 <h2>
-                    {content.heading}
+                    {header}
                 </h2>
-                <div>
-                    {content.text}
-                </div>
+                {parafs.map(item => <div>{item.text}</div>)}
             </div>
         }
         </div>
