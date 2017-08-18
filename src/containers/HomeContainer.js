@@ -41,18 +41,17 @@ class HomeContainer extends PureComponent {
 
   handleOnChange(event, contentPart) {
     let obj = {};
-    let parafs = Object.assign([],this.state.parafs);
+    let parafs = this.state.parafs;
     if(this.isNumber(contentPart)){
-      obj.text =  event.target.value;
+      obj = {text: event.target.value};
       parafs[contentPart] = obj;
-      parafs[contentPart].id = this.state.parafs[contentPart].id;
       this.setState({parafs});
     }else {
       obj[contentPart] = event.target.value;
       this.setState(obj);
     }
   }
-  
+
   isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
   }
@@ -73,14 +72,16 @@ class HomeContainer extends PureComponent {
   }
 
   loadHomeContent() {
-    
-    let url = 'http://localhost:3000/admin/pages/5/paragraphs.json'
+
+    let url = 'http://localhost:5000/admin/pages/5/paragraphs.json'
+    let data;
     fetch(url)
-    .then((resp) => resp.json()) 
+    .then((resp) => resp.json())
     .then(function(data) {
+      data = data;
       this.updateState(data);
     }.bind(this));
-  
+
   }
 
   updateState(data){
@@ -89,7 +90,7 @@ class HomeContainer extends PureComponent {
       if (item.heading){
         this.setState({header: item.heading});
       }
-      parafs.push({text: item.text, id: item.id});
+      parafs.push({text: item.text});
     });
     this.setState({parafs});
   }
@@ -105,7 +106,7 @@ class HomeContainer extends PureComponent {
     console.log('saveHomeContent', this.state.parafs);
 
 
-    const url = 'http://localhost:3000/admin/reviews.json';
+    const url = 'http://localhost:5000/admin/reviews.json';
     // The data we are going to send in our request
     // let data = {
     //     title: this.state.title,
