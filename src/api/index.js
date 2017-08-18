@@ -14,7 +14,7 @@
 
 import request from 'superagent'
 
-const RAILS_HOST = 'http://localhost:5000/admin'
+const RAILS_HOST = 'http://localhost:5000/admin' // <-- note: no trailing slash! :)
 
 export default class API {
   resourcePath(resource) {
@@ -31,6 +31,7 @@ export default class API {
   find(resource) {
     return request
       .get(this.resourcePath(resource))
+      .withCredentials()
       .type('json')
       .accept('json')
   }
@@ -46,5 +47,8 @@ export default class API {
     return request
       .post(this.resourcePath(resource))
       .send(data)
+      .withCredentials()
+      .type('json')
+      .accept('json')
   }
 }
