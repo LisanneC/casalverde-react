@@ -5,6 +5,7 @@ import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
 import PricePage from '../components/PricePage';
 import ImageUploader from '../components/ImageUploader';
+import { fetchPrices } from '../actions/priceActions';
 
 
 class PriceContainer extends PureComponent {
@@ -14,6 +15,10 @@ class PriceContainer extends PureComponent {
       edit: false,
       buttonName: 'Edit',
     }
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchPrices())
   }
 
   render() {

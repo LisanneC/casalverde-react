@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
 
 const PricePage = ({edit, content}) => {
+  console.log(content)
     return (
         <div className='pricepage'>
         { edit ?
@@ -34,26 +35,33 @@ const PricePage = ({edit, content}) => {
             </div>
         :
             <div>
-                <img src={content.image} />
-                    {content.start_date}
-                <div>
-                    {content.end_date}
+              {content.map((item, i) => {
+                return (
+                <div key={i}>
+                  <div>
+                    {item.start_date}
+                  </div>
+                  <div>
+                      {item.end_date}
+                  </div>
+                  <div>
+                      {item.min_days}
+                  </div>
+                  <div>
+                    €  {item.nightly_price}
+                  </div>
+                  <div>
+                    €  {item.extra_price}
+                  </div>
+                  <div>
+                    €  {item.saturdays_only}
+                  </div>
+                  <div>
+                    €  {item.service_cost}
+                  </div>
                 </div>
-                <div>
-                    {content.min_days}
-                </div>
-                <div>
-                  €  {content.nightly_price}
-                </div>
-                <div>
-                  €  {content.extra_price}
-                </div>
-                <div>
-                  €  {content.saturdays_only}
-                </div>
-                <div>
-                  €  {content.service_cost}
-                </div>
+                  )
+                })}
             </div>
         }
         </div>
