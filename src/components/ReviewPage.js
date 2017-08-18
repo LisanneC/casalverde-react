@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
 
 const ReviewPage = ({edit, content}) => {
+    console.log(content)
     return (
-
         <div className='reviewpage'>
         { edit ?
             <div className='form'>
@@ -23,7 +23,7 @@ const ReviewPage = ({edit, content}) => {
             <div>
                 {content.map((item, i) => {
                   return (
-                    <div id={i}>
+                    <div key={i}>
                       <div>
                         {item.name}
                       </div>
