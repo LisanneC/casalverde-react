@@ -5,7 +5,7 @@ import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
 import ReviewPage from '../components/ReviewPage';
 import ImageUploader from '../components/ImageUploader';
-
+import { fetchReviews } from '../actions/reviewActions';
 
 class ReviewContainer extends PureComponent {
   constructor(props){
@@ -14,6 +14,10 @@ class ReviewContainer extends PureComponent {
       edit: false,
       buttonName: 'Edit',
     }
+  }
+
+  componentWillMount() {
+    this.props.dispatch(fetchReviews())
   }
 
   render() {

@@ -1,25 +1,7 @@
-
-const reviewPageContent =
-[{
-  name:'Stefan',
-  stars:'4',
-  review: 'Really cool place. Too bad the wifi was bad',
-},{
-  name:'Anne',
-  stars:'5',
-  review:"It was the most impressive location I've ever been to.",
-},{
-  name: 'Kaatje',
-  stars: '5',
-  review: "It was the most impressive location I've ever been to.",
- }]
-
-const initialState = reviewPageContent
-
-export default (state = initialState, { type, payload } = {}) => {
+export default (state = [], { type, payload } = {}) => {
   switch(type) {
     case 'LOAD_REVIEWPAGE' :
-        return [Object.assign({}, payload)].concat(state);
+        return [ ...payload ]
     default :
         return state;
   }
