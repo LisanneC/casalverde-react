@@ -5,6 +5,7 @@ import HomePage from '../components/HomePage';
 import RaisedButton from 'material-ui/RaisedButton';
 import BookingPage from '../components/BookingPage';
 import ImageUploader from '../components/ImageUploader';
+import { fetchBookings } from '../actions/bookingActions';
 
 
 class BookingContainer extends PureComponent {
@@ -15,6 +16,10 @@ class BookingContainer extends PureComponent {
       buttonName: 'Edit',
     }
   }
+
+componentWillMount() {
+  this.props.dispatch(fetchBookings())
+}
 
   render() {
     return(

@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
 import DatePicker from './DatePicker';
 import SelectTitle from './SelectTitle';
 
 const BookingPage = ({edit, content}) => {
+  console.log(content)
     return (
         <div className='bookingpage'>
         { edit ?
@@ -48,23 +49,32 @@ const BookingPage = ({edit, content}) => {
             </div>
         :
             <div className='form'>
-                <div> {content.title}</div><br/>
-                <div>{content.first_name}</div><br/>
-                <div>{content.last_name}</div><br/>
-                <div>{content.phone}</div><br/>
-                <div>{content.email}</div><br/>
-                <div>{content.street_name} {content.street_number}</div><br/>
-                <div>{content.city}</div><br/>
-                <div>{content.zip_code}</div><br/>
-                <div>{content.people}</div><br/>
-                <div> € {content.total_price}</div><br/>
-                <div>{content.confirmed}</div><br/>
-                <div>{content.paid}</div><br/>
+            <div>
+              {content.map((item, i) => {
+                return (
+                <div key={i}>
+                <div>{item.check_in}</div>
+                <div>{item.check_out}</div>
+                <div>{item.title}</div>
+                <div>{item.first_name}</div>
+                <div>{item.last_name}</div>
+                <div>{item.phone}</div>
+                <div>{item.email}</div>
+                <div>{item.street_name}</div> <div> {item.street_number}</div>
+                <div>{item.city}</div>
+                <div>{item.zip_code}</div>
+                <div>{item.people}</div>
+                <div> € {item.total_price}</div>
+                <div>{item.confirmed}</div>
+                <div>{item.paid}</div>
                 <div>
                   <DatePicker />
                 </div>
-
+                </div>
+                )
+              })}
             </div>
+          </div>
         }
         </div>
     )
