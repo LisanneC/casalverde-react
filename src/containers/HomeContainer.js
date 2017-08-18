@@ -6,7 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ImageUploader from '../components/ImageUploader';
 import {saveHomeContent} from '../actions/homeActions';
 
-
 class HomeContainer extends PureComponent {
   constructor(props){
     super(props);
