@@ -41,7 +41,7 @@ export default class LoadingComponent extends PureComponent {
             if(newContent){
                 response.body.push(newContent);
             }
-            this.setState({homeContent: response.body});
+            this.setState({content: response.body});
         });
     }
 

@@ -9,7 +9,7 @@ class HomeContainer extends LoadingComponent {
   constructor(props){
     super(props);
     this.state = {
-      homeContent: [],
+      content: [],
     }
   }
 
@@ -18,7 +18,7 @@ class HomeContainer extends LoadingComponent {
   }
 
   renderContent() {
-    return this.state.homeContent.map(item =>  {
+    return this.state.content.map(item =>  {
       return ( 
         <HomeContent key={item.id} 
           handleOnSave={this.saveHomeContent.bind(this)} 

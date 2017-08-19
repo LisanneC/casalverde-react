@@ -16,16 +16,12 @@ class HomeContent extends PureComponent {
         }
     }
 
-    handleHeadingOnChange (event){
-        this.setState({
-            heading: event.target.value
-        })
+    handleOnChange (field, event){
+        let newState = {};
+        newState[field] = event.target.value;
+        this.setState(newState);
     }
-    handleTextOnChange (event){
-        this.setState({
-            text: event.target.value
-        })
-    }
+    
 
     handleMode(){
         if (this.state.edit) {
@@ -41,7 +37,6 @@ class HomeContent extends PureComponent {
 
 
     render() {
-        console.log('this.props', this.props);
         return (
             <Card >
                 {this.state.edit ? 
@@ -58,7 +53,7 @@ class HomeContent extends PureComponent {
                 <CardTitle>
                     {this.state.edit ? 
                         <span> 
-                            <TextField id="text-field-controlled" value={this.state.heading} onChange={this.handleHeadingOnChange.bind(this)}/>  
+                            <TextField id="text-field-controlled" value={this.state.heading} onChange={this.handleOnChange.bind(this, 'heading')}/>  
                         </span>
                     :
                         <h1> {this.state.heading} </h1>
@@ -67,7 +62,7 @@ class HomeContent extends PureComponent {
                 <CardText>
                     {this.state.edit ? 
                         <span> 
-                            <TextField id="text-field-controlled" value={this.state.text} onChange={this.handleTextOnChange.bind(this)}/>  
+                            <TextField id="text-field-controlled" value={this.state.text} onChange={this.handleOnChange.bind(this, 'text')}/>  
                         </span>
                     :
                         <div> {this.state.text} </div>
