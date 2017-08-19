@@ -73,7 +73,7 @@ class HomeContainer extends PureComponent {
 
   loadHomeContent() {
 
-    let url = 'http://localhost:5000/admin/pages/5/paragraphs.json'
+    let url = 'http://localhost:5000/admin/pages/7/paragraphs.json'
     let data;
     fetch(url)
     .then((resp) => resp.json())
@@ -106,7 +106,7 @@ class HomeContainer extends PureComponent {
     console.log('saveHomeContent', this.state.parafs);
 
 
-    const url = 'http://localhost:5000/admin/reviews.json';
+    const url = 'http://localhost:5000/admin/pages/7/paragraphs.json';
     // The data we are going to send in our request
     // let data = {
     //     title: this.state.title,
