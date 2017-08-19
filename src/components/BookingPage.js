@@ -9,70 +9,77 @@ const BookingPage = ({edit, content}) => {
         <div className='bookingpage'>
         { edit ?
             <div className='form'>
-              <div><SelectTitle defaultValue={content.title}/></div>
-                <TextField defaultValue={content.first_name} placeholder='First name' floatingLabelText='First name'/>
-                <TextField defaultValue={content.last_name} placeholder='Last name' floatingLabelText='Last name'/>
-                <div>
-                    <TextField defaultValue={content.phone} placeholder='Phone number' floatingLabelText='Phone number'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.email} placeholder='email' floatingLabelText='email'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.street_name} placeholder='Street' floatingLabelText='Street'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.street_number} placeholder='House number' floatingLabelText='House number'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.city} placeholder='City' floatingLabelText='City'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.zip_code} placeholder='Zip code' floatingLabelText='Zip code'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.people} placeholder='People' floatingLabelText='People'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.total_price} placeholder='Total price' floatingLabelText='Total price'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.confirmed} placeholder='Confirmed' floatingLabelText='Confirmed'/>
-                </div>
-                <div>
-                    <TextField defaultValue={content.paid} placeholder='Paid' floatingLabelText='Paid'/>
-                </div>
-                <div>
-                  <DatePicker />
-                </div>
+                {content.map((item, i) => {
+                    return (
+                        <div key={i}>
+                            <div><SelectTitle defaultValue={item.title}/></div>
+                            <TextField defaultValue={item.first_name} placeholder='First name' floatingLabelText='First name'/>
+                            <TextField defaultValue={item.last_name} placeholder='Last name' floatingLabelText='Last name'/>
+                            <div>
+                                <TextField defaultValue={item.phone} placeholder='Phone number' floatingLabelText='Phone number'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.email} placeholder='email' floatingLabelText='email'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.street_name} placeholder='Street' floatingLabelText='Street'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.street_number} placeholder='House number' floatingLabelText='House number'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.city} placeholder='City' floatingLabelText='City'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.zip_code} placeholder='Zip code' floatingLabelText='Zip code'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.people} placeholder='People' floatingLabelText='People'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.total_price} placeholder='Total price' floatingLabelText='Total price'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.confirmed} placeholder='Confirmed' floatingLabelText='Confirmed'/>
+                            </div>
+                            <div>
+                                <TextField defaultValue={item.paid} placeholder='Paid' floatingLabelText='Paid'/>
+                            </div>
+                            <div>
+                            <DatePicker />
+                            </div>
+                        </div>
+                    )
+                })}
 
             </div>
         :
             <div className='form'>
             <div>
-              {content.map((item, i) => {
-                return (
-                <div key={i}>
-                <div>{item.check_in}</div>
-                <div>{item.check_out}</div>
-                <div>{item.title}</div>
-                <div>{item.first_name}</div>
-                <div>{item.last_name}</div>
-                <div>{item.phone}</div>
-                <div>{item.email}</div>
-                <div>{item.street_name}</div> <div> {item.street_number}</div>
-                <div>{item.city}</div>
-                <div>{item.zip_code}</div>
-                <div>{item.people}</div>
-                <div> € {item.total_price}</div>
-                <div>{item.confirmed}</div>
-                <div>{item.paid}</div>
-                <div>
-                  <DatePicker />
-                </div>
-                </div>
-                )
-              })}
+                {content.map((item, i) => {
+                    return (
+                        <div key={i}>
+                            <div>{item.title}</div>
+                            <div>{item.check_in}</div>
+                            <div>{item.check_out}</div>
+                            <div>{item.title}</div>
+                            <div>{item.first_name}</div>
+                            <div>{item.last_name}</div>
+                            <div>{item.phone}</div>
+                            <div>{item.email}</div>
+                            <div>{item.street_name}</div> <div> {item.street_number}</div>
+                            <div>{item.city}</div>
+                            <div>{item.zip_code}</div>
+                            <div>{item.people}</div>
+                            <div> € {item.total_price}</div>
+                            <div>{item.confirmed}</div>
+                            <div>{item.paid}</div>
+                            <div>
+                            <DatePicker />
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
           </div>
         }

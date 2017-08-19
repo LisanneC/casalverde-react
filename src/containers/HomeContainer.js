@@ -42,29 +42,20 @@ class HomeContainer extends LoadingComponent {
   }
 
   loadHomeContent() {
-    this.fetch('pages/9/paragraphs.json', 'GET').then((response) => {
-      let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
-      response.body.push(newContent);
-      this.setState({homeContent: response.body});
-    });
+    let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
+    this.loadContent('pages/9/paragraphs', 'GET', newContent);
   }
 
   saveHomeContent(item) {
-    this.fetch(`pages/9/paragraphs`, 'POST', item).then((response) => {
-      this.loadHomeContent();
-    });
+    this.saveContent('pages/9/paragraphs', 'POST', item);
   }
 
   updateHomeContent(item) {
-    this.fetch(`pages/9/paragraphs/${item.id}`, 'PUT', item).then((response) => {
-      this.loadHomeContent();
-    });
+    this.updateContent(`pages/9/paragraphs/${item.id}`, 'PUT', item);
   }
 
   deleteParagraph(id){
-    this.fetch(`pages/9/paragraphs/${id}`, 'DELETE').then((response) => {
-      this.loadHomeContent();
-    });
+    this.deleteContent(`pages/9/paragraphs/${id}`, 'DELETE');
   }
 }
 

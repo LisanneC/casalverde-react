@@ -44,10 +44,12 @@ class HomeContent extends PureComponent {
 
 
     render() {
+        console.log('this.props', this.props);
         return (
             <Card >
-                {this.props.new ? "Add a new Record" : 
+                {this.props.new ? " " : 
                     <Delete onClick={() => this.props.handleOnDelete(this.props.id)} />
+                    
                 }
                 <CardTitle>
                     {this.state.editableHeader ? 

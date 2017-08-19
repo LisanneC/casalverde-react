@@ -6,9 +6,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import BookingPage from '../components/BookingPage';
 import ImageUploader from '../components/ImageUploader';
 import { fetchBookings } from '../actions/bookingActions';
+import LoadingComponent from './LoadingComponent';
 
 
-class BookingContainer extends PureComponent {
+class BookingContainer extends LoadingComponent {
   constructor(props){
     super(props);
     this.state = {
