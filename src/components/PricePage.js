@@ -11,7 +11,7 @@ const PricePage = ({edit, content}) => {
         <div className='pricepage'>
         { edit ?
             <div className='form'>
-                {/* <img src={content.image} /> */} 
+                {/* <img src={content.image} /> */}
                 <div>
                     <TextField defaultValue={content.start_date} placeholder='Start date' floatingLabelText='Start date '/>
                 </div>

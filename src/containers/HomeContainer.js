@@ -19,12 +19,12 @@ class HomeContainer extends LoadingComponent {
 
   renderContent() {
     return this.state.content.map(item =>  {
-      return ( 
-        <HomeContent key={item.id} 
-          handleOnSave={this.saveHomeContent.bind(this)} 
-          handleOnUpdate={this.updateHomeContent.bind(this)} 
+      return (
+        <HomeContent key={item.id}
+          handleOnSave={this.saveHomeContent.bind(this)}
+          handleOnUpdate={this.updateHomeContent.bind(this)}
           handleOnDelete={this.deleteParagraph.bind(this)}
-          {...item} 
+          {...item}
         />
       )
     });
@@ -43,19 +43,19 @@ class HomeContainer extends LoadingComponent {
 
   loadHomeContent() {
     let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
-    this.loadContent('pages/9/paragraphs', 'GET', newContent);
+    this.loadContent('pages/6/paragraphs', 'GET', newContent);
   }
 
   saveHomeContent(item) {
-    this.saveContent('pages/9/paragraphs', 'POST', item);
+    this.saveContent('pages/6/paragraphs', 'POST', item);
   }
 
   updateHomeContent(item) {
-    this.updateContent(`pages/9/paragraphs/${item.id}`, 'PUT', item);
+    this.updateContent(`pages/6/paragraphs/${item.id}`, 'PUT', item);
   }
 
   deleteParagraph(id){
-    this.deleteContent(`pages/9/paragraphs/${id}`, 'DELETE');
+    this.deleteContent(`pages/6/paragraphs/${id}`, 'DELETE');
   }
 }
 
