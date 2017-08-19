@@ -17,10 +17,10 @@ let TextFieldFloat = React.createClass({
   },
   save: function () {
       this.setState({editing: false});
-<<<<<<< HEAD
-      // console.log(this.state)
-=======
->>>>>>> e46c7738246a30c579a674a6e890d982e10e4c7e
+// <<<<<<< HEAD
+//       // console.log(this.state)
+// =======
+// >>>>>>> e46c7738246a30c579a674a6e890d982e10e4c7e
   },
 
   renderNormal: function () {
