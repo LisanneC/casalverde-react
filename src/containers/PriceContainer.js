@@ -6,46 +6,63 @@ import RaisedButton from 'material-ui/RaisedButton';
 import PricePage from '../components/PricePage';
 import ImageUploader from '../components/ImageUploader';
 import { fetchPrices } from '../actions/priceActions';
+import LoadingComponent from './LoadingComponent';
+import PriceContent from '../components/PriceContent';
 
 
-class PriceContainer extends PureComponent {
+
+class PriceContainer extends LoadingComponent {
+
   constructor(props){
     super(props);
     this.state = {
-      edit: false,
-      buttonName: 'Edit',
+      content: [],
     }
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchPrices())
+    this.loadPriceContent();
+  }
+
+  renderContent() {
+    return this.state.content.map(item =>  {
+      return (
+        <PriceContent key={item.id}
+          handleOnSave={this.savePriceContent.bind(this)}
+          handleOnUpdate={this.updatePriceContent.bind(this)}
+          handleOnDelete={this.deleteParagraph.bind(this)}
+          {...item}
+        />
+      )
+    });
   }
 
   render() {
     return(
       <div className="Pages wrapper">
-        <main>
+        <div>
           <ImageUploader />
-          <PricePage edit={this.state.edit} content={this.props.pricePageContent} />
-          <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
-        </main>
+          {this.renderContent()}
+        </div>
       </div>
     )
   }
 
-  handleOnClick() {
-    if(this.state.edit){
-      this.setState({
-        edit: false,
-        buttonName: 'Edit'
-      });
-    }else {
-      this.setState({
-        edit: true,
-        buttonName: 'Save'
-      });
+  loadPriceContent() {
+    let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
+    this.loadContent('prices', 'GET', newContent);
+  }
 
-    }
+  savePriceContent(item) {
+    this.saveContent('prices', 'POST', item);
+  }
+
+  updatePriceContent(item) {
+    this.updateContent('prices/${item.id}', 'PUT', item);
+  }
+
+  deleteParagraph(id){
+    this.deleteContent('prices/${id}', 'DELETE');
   }
 }
 
