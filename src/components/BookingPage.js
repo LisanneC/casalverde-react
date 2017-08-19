@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import DatePicker from './DatePicker';
 import SelectTitle from './SelectTitle';
+import Confirmed from './Confirmed'
+
 
 const BookingPage = ({edit, content}) => {
   console.log(content)
@@ -65,7 +67,7 @@ const BookingPage = ({edit, content}) => {
                 <div>{item.zip_code}</div>
                 <div>{item.people}</div>
                 <div> € {item.total_price}</div>
-                <div>{item.confirmed}</div>
+                <div><Confirmed booking={item} />{item.confirmed}</div>
                 <div>{item.paid}</div>
                 <div>
                   <DatePicker />
