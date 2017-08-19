@@ -12,22 +12,7 @@ class HomeContent extends PureComponent {
         this.state = {
             heading: this.props.heading ? this.props.heading : 'NO HEADING YET',
             text: this.props.text ? this.props.text : 'NO TEXT YET',
-            editableHeader: false,
-            editableText: false,
-        }
-    }
-    handleOnEditChange(type, done) {
-        if (type === 'heading'){
-            this.setState({ editableHeader: !this.state.editableHeader});
-        } else {
-            this.setState({ editableText: !this.state.editableText});
-        }
-        if (done){
-            if(this.props.new){
-                this.props.handleOnSave({id: this.props.id, heading: this.state.heading, text: this.state.text});
-            } else {
-                this.props.handleOnUpdate({id: this.props.id, heading: this.state.heading, text: this.state.text});
-            }
+            edit: false,
         }
     }
 
@@ -42,33 +27,50 @@ class HomeContent extends PureComponent {
         })
     }
 
+    handleMode(){
+        if (this.state.edit) {
+            this.props.handleOnUpdate({id: this.props.id, heading: this.state.heading, text: this.state.text});
+        }
+        if (this.props.new) {
+            this.props.handleOnSave({id: this.props.id, heading: this.state.heading, text: this.state.text});
+        }
+        this.setState({
+            edit: !this.state.edit,
+        })
+    }
+
 
     render() {
         console.log('this.props', this.props);
         return (
             <Card >
-                {this.props.new ? " " : 
-                    <Delete onClick={() => this.props.handleOnDelete(this.props.id)} />
-                    
+                {this.state.edit ? 
+                    <div>
+                        <Delete onClick={() => this.props.handleOnDelete(this.props.id)} />
+                        <Done onClick={this.handleMode.bind(this)}/>
+                    </div>
+                : 
+                    <div>
+                        <Delete onClick={() => this.props.handleOnDelete(this.props.id)} />
+                        <ModeEdit onClick={this.handleMode.bind(this)}/>
+                    </div>
                 }
                 <CardTitle>
-                    {this.state.editableHeader ? 
+                    {this.state.edit ? 
                         <span> 
                             <TextField id="text-field-controlled" value={this.state.heading} onChange={this.handleHeadingOnChange.bind(this)}/>  
-                            <Done onClick={this.handleOnEditChange.bind(this, 'heading', true)} />
                         </span>
                     :
-                        <h1> {this.state.heading}  <ModeEdit onClick={this.handleOnEditChange.bind(this, 'heading', false)}/></h1>
+                        <h1> {this.state.heading} </h1>
                     }
                 </CardTitle>
                 <CardText>
-                    {this.state.editableText ? 
+                    {this.state.edit ? 
                         <span> 
                             <TextField id="text-field-controlled" value={this.state.text} onChange={this.handleTextOnChange.bind(this)}/>  
-                            <Done onClick={this.handleOnEditChange.bind(this, 'text', true)} />
                         </span>
                     :
-                        <div> {this.state.text}  <ModeEdit onClick={this.handleOnEditChange.bind(this, 'text', false)}/></div>
+                        <div> {this.state.text} </div>
                     }
                 </CardText>
             </Card>
