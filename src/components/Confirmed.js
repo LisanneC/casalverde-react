@@ -27,6 +27,5 @@ class Confirmed extends React.Component {
     }
   }
 
-// export default Confirmed;
 const mapStateToProps = () => ({});
 export default connect(mapStateToProps)(Confirmed);

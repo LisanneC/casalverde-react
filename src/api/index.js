@@ -62,5 +62,12 @@ export default class API {
       .accept('json')
   }
 
+  destroy(resource, id) {
+    return request
+      .delete(this.resourcePath(resource) +`/${id}`)
+      .withCredentials()
+      .type('json')
+      .accept('json')
+  }
 
 }

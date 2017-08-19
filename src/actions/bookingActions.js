@@ -28,3 +28,17 @@ export const saveBooking = (booking) => {
       })
   }
 }
+
+
+export const deleteBooking = (id) => {
+  return (dispatch) => {
+    const api = new API()
+    api.destroy('bookings', id)
+      .then((response) => {
+        fetchBookings()(dispatch);
+      })
+      .catch((error) => {
+        debugger // maybe show an error or redirect te sign in etc
+      })
+  }
+}
