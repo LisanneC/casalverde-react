@@ -1,5 +1,9 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import { Panel } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
+
+
 
 const PricePage = ({edit, content}) => {
   console.log(content)
@@ -7,7 +11,7 @@ const PricePage = ({edit, content}) => {
         <div className='pricepage'>
         { edit ?
             <div className='form'>
-                <img src={content.image} />
+                {/* <img src={content.image} /> */} 
                 <div>
                     <TextField defaultValue={content.start_date} placeholder='Start date' floatingLabelText='Start date '/>
                 </div>
@@ -38,27 +42,17 @@ const PricePage = ({edit, content}) => {
               {content.map((item, i) => {
                 return (
                 <div key={i}>
-                  <div>
-                    {item.start_date}
-                  </div>
-                  <div>
-                      {item.end_date}
-                  </div>
-                  <div>
-                      {item.min_days}
-                  </div>
-                  <div>
-                    €  {item.nightly_price}
-                  </div>
-                  <div>
-                    €  {item.extra_price}
-                  </div>
-                  <div>
-                    €  {item.saturdays_only}
-                  </div>
-                  <div>
-                    €  {item.service_cost}
-                  </div>
+                  <Panel collapsible defaultExpanded header="Seizoen" bsStyle="danger">
+                    <ListGroup fill>
+                      <ListGroupItem>Start date : {item.start_date}</ListGroupItem>
+                      <ListGroupItem>End date : {item.end_date}</ListGroupItem>
+                      <ListGroupItem> Min. days : {item.min_days}</ListGroupItem>
+                      <ListGroupItem>Nightly price : € {item.nightly_price}</ListGroupItem>
+                      <ListGroupItem>Extra price : € {item.extra_price}</ListGroupItem>
+                      <ListGroupItem>Saturdays only : {item.saturdays_only}</ListGroupItem>
+                      <ListGroupItem>Service cost : {item.service_cost}</ListGroupItem>
+                    </ListGroup>
+                  </Panel>
                 </div>
                   )
                 })}

@@ -8,6 +8,7 @@ import store from './store'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/themes'
+// import reactBootstrap from '../node_modules/react-bootstrap/dist/react-bootstrap.min.js';
 
 
 injectTapEventPlugin()

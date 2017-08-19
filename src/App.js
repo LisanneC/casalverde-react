@@ -10,6 +10,8 @@ import muiTheme from './assets/styles/themes';
 import ImageUploader from './components/ImageUploader';
 import ReactPlayer from './components/ReactPlayer';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import './App.css';
 
