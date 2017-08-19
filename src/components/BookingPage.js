@@ -2,6 +2,8 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import DatePicker from './DatePicker';
 import SelectTitle from './SelectTitle';
+import Confirmed from './Confirmed'
+
 
 const BookingPage = ({edit, content}) => {
   console.log(content)
@@ -56,30 +58,29 @@ const BookingPage = ({edit, content}) => {
         :
             <div className='form'>
             <div>
-                {content.map((item, i) => {
-                    return (
-                        <div key={i}>
-                            <div>{item.title}</div>
-                            <div>{item.check_in}</div>
-                            <div>{item.check_out}</div>
-                            <div>{item.title}</div>
-                            <div>{item.first_name}</div>
-                            <div>{item.last_name}</div>
-                            <div>{item.phone}</div>
-                            <div>{item.email}</div>
-                            <div>{item.street_name}</div> <div> {item.street_number}</div>
-                            <div>{item.city}</div>
-                            <div>{item.zip_code}</div>
-                            <div>{item.people}</div>
-                            <div> € {item.total_price}</div>
-                            <div>{item.confirmed}</div>
-                            <div>{item.paid}</div>
-                            <div>
-                            <DatePicker />
-                            </div>
-                        </div>
-                    )
-                })}
+              {content.map((item, i) => {
+                return (
+                <div key={i}>
+                <div>{item.check_in}</div>
+                <div>{item.check_out}</div>
+                <div>{item.title}</div>
+                <div>{item.first_name}</div>
+                <div>{item.last_name}</div>
+                <div>{item.phone}</div>
+                <div>{item.email}</div>
+                <div>{item.street_name}</div> <div> {item.street_number}</div>
+                <div>{item.city}</div>
+                <div>{item.zip_code}</div>
+                <div>{item.people}</div>
+                <div> € {item.total_price}</div>
+                <div><Confirmed booking={item} />{item.confirmed}</div>
+                <div>{item.paid}</div>
+                <div>
+                  <DatePicker />
+                </div>
+                </div>
+                )
+              })}
             </div>
           </div>
         }

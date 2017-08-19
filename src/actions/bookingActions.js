@@ -15,3 +15,16 @@ export const fetchBookings = () => {
       })
   }
 }
+
+export const saveBooking = (booking) => {
+  return (dispatch) => {
+    const api = new API()
+    api.update('bookings', booking.id, booking)
+      .then((response) => {
+        fetchBookings()(dispatch);
+      })
+      .catch((error) => {
+        debugger // maybe show an error or redirect te sign in etc
+      })
+  }
+}

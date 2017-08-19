@@ -4,8 +4,8 @@ import ImageUploader from '../components/ImageUploader';
 import LoadingComponent from './LoadingComponent';
 import HomeContent from '../components/HomeContent';
 
-
 class HomeContainer extends LoadingComponent {
+
   constructor(props){
     super(props);
     this.state = {
