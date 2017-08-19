@@ -1,5 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import { Panel } from 'react-bootstrap';
+
 
 const PricePage = ({edit, content}) => {
   console.log(content)
@@ -38,6 +40,8 @@ const PricePage = ({edit, content}) => {
               {content.map((item, i) => {
                 return (
                 <div key={i}>
+                  <Panel header="title" bsStyle="danger">
+                    {item.start_date}
                   <div>
                     {item.start_date}
                   </div>
@@ -59,6 +63,8 @@ const PricePage = ({edit, content}) => {
                   <div>
                     €  {item.service_cost}
                   </div>
+                </Panel>
+
                 </div>
                   )
                 })}
