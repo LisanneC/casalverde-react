@@ -1,20 +1,15 @@
 import React, { PureComponent } from 'react';
-import Title from '../components/Title';
 import {connect} from 'react-redux';
-import HomePage from '../components/HomePage';
-import RaisedButton from 'material-ui/RaisedButton';
 import ImageUploader from '../components/ImageUploader';
-import {saveHomeContent} from '../actions/homeActions';
+import LoadingComponent from './LoadingComponent';
+import HomeContent from '../components/HomeContent';
 
 
-class HomeContainer extends PureComponent {
+class HomeContainer extends LoadingComponent {
   constructor(props){
     super(props);
     this.state = {
-      edit: false,
-      buttonName: 'Edit',
-      header: '',
-      parafs: [],
+      homeContent: [],
     }
   }
 
@@ -22,108 +17,54 @@ class HomeContainer extends PureComponent {
     this.loadHomeContent();
   }
 
+  renderContent() {
+    return this.state.homeContent.map(item =>  {
+      return ( 
+        <HomeContent key={item.id} 
+          handleOnSave={this.saveHomeContent.bind(this)} 
+          handleOnUpdate={this.updateHomeContent.bind(this)} 
+          handleOnDelete={this.deleteParagraph.bind(this)}
+          {...item} 
+        />
+      )
+    });
+  }
+
   render() {
     return(
       <div className="Pages wrapper">
-        <main>
+        <div>
           <ImageUploader />
-          <HomePage
-              edit={this.state.edit}
-              header={this.state.header}
-              parafs={this.state.parafs} // this.state.content
-              handleOnChange={this.handleOnChange.bind(this)}
-          />
-          <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
-        </main>
+          {this.renderContent()}
+        </div>
       </div>
     )
   }
 
-  handleOnChange(event, contentPart) {
-    let obj = {};
-    let parafs = this.state.parafs;
-    if(this.isNumber(contentPart)){
-      obj = {text: event.target.value};
-      parafs[contentPart] = obj;
-      this.setState({parafs});
-    }else {
-      obj[contentPart] = event.target.value;
-      this.setState(obj);
-    }
-  }
-
-  isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-  }
-
-  handleOnClick() {
-    if(this.state.edit){
-      this.setState({
-        edit: false,
-        buttonName: 'Edit'
-      });
-      this.saveHomeContent();
-    }else {
-      this.setState({
-        edit: true,
-        buttonName: 'Save'
-      });
-    }
-  }
-
   loadHomeContent() {
-
-    let url = 'http://localhost:5000/admin/pages/7/paragraphs.json'
-    let data;
-    fetch(url)
-    .then((resp) => resp.json())
-    .then(function(data) {
-      data = data;
-      this.updateState(data);
-    }.bind(this));
-
-  }
-
-  updateState(data){
-    let parafs = [];
-    data.map(item => {
-      if (item.heading){
-        this.setState({header: item.heading});
-      }
-      parafs.push({text: item.text});
+    this.fetch('pages/9/paragraphs.json', 'GET').then((response) => {
+      let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
+      response.body.push(newContent);
+      this.setState({homeContent: response.body});
     });
-    this.setState({parafs});
   }
 
-  saveHomeContent() {
+  saveHomeContent(item) {
+    this.fetch(`pages/9/paragraphs`, 'POST', item).then((response) => {
+      this.loadHomeContent();
+    });
+  }
 
-    // let homeContent = {
-    //     title: this.state.title,
-    //     text: this.state.text
-    //   }
-    // this.props.dispatch(saveHomeContent(homeContent));
+  updateHomeContent(item) {
+    this.fetch(`pages/9/paragraphs/${item.id}`, 'PUT', item).then((response) => {
+      this.loadHomeContent();
+    });
+  }
 
-    console.log('saveHomeContent', this.state.parafs);
-
-
-    const url = 'http://localhost:5000/admin/pages/7/paragraphs.json';
-    // The data we are going to send in our request
-    // let data = {
-    //     title: this.state.title,
-    //     text: this.state.text
-    //   }
-
-    // The parameters we are gonna pass to the fetch function
-    // let fetchData = {
-    //     method: 'POST',
-    //     body: data,
-    //     headers: new Headers()
-    // }
-    // fetch(url, fetchData)
-    // .then(function() {
-    //     // Handle response you get from the server
-    // });
-
+  deleteParagraph(id){
+    this.fetch(`pages/9/paragraphs/${id}`, 'DELETE').then((response) => {
+      this.loadHomeContent();
+    });
   }
 }
 
