@@ -14,7 +14,7 @@ export default class HomeContainer extends LoadingComponent {
   }
 
   getUrl() {
-    return 'pages/10/paragraphs';
+    return 'pages/11/paragraphs';
   }
 
   componentWillMount() {
@@ -28,6 +28,7 @@ export default class HomeContainer extends LoadingComponent {
           handleOnSave={this.saveData.bind(this)} 
           handleOnUpdate={this.updateData.bind(this)} 
           handleOnDelete={this.deleteData.bind(this)}
+          cardTitle='PARAGRAPH'
           content={item} 
         />
       )
@@ -41,7 +42,8 @@ export default class HomeContainer extends LoadingComponent {
           {this.renderContent()}
           {this.state.content.length > 0 ?
             <NCard 
-              handleOnSave={this.saveData.bind(this)} 
+              handleOnSave={this.saveData.bind(this)}
+              cardTitle='ADD NEW PARAGRAPH' 
               content={this.state.content[0]} 
             />
           : 

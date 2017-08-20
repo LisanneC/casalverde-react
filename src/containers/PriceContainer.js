@@ -28,6 +28,7 @@ export default class PriceContainer extends LoadingComponent {
           handleOnSave={this.saveData.bind(this)} 
           handleOnUpdate={this.updateData.bind(this)} 
           handleOnDelete={this.deleteData.bind(this)}
+          cardTitle="PRICE"
           content={item} 
         />
       )
@@ -42,6 +43,7 @@ export default class PriceContainer extends LoadingComponent {
           {this.state.content.length > 0 ?
             <NCard 
               handleOnSave={this.saveData.bind(this)} 
+              cardTitle="ADD NEW PRICE"
               content={this.state.content[0]} 
             />
           : 

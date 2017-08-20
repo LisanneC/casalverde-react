@@ -22,7 +22,7 @@ class BottomNavigationExampleSimple extends Component {
 
   render() {
     return (
-      <Paper zDepth={1}>
+      <Paper zDepth={1} style={{boxShadow: '0' }}>
         <BottomNavigation selectedIndex={this.props.selectedItem}>
           <BottomNavigationItem
             label="Home Page"

@@ -27,7 +27,7 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div>
+      <div className='app'>
           <Navigation selectedItem={this.state.selectedMenuItem} updateMenuItem={this.setMenuItem.bind(this)}/>
           {this.renderContent()}
       </div>
