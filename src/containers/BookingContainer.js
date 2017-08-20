@@ -1,55 +1,63 @@
-import React, { PureComponent } from 'react';
-import Title from '../components/Title';
+import React from 'react';
 import {connect} from 'react-redux';
-import HomePage from '../components/HomePage';
-import RaisedButton from 'material-ui/RaisedButton';
-import BookingPage from '../components/BookingPage';
 import ImageUploader from '../components/ImageUploader';
-import { fetchBookings } from '../actions/bookingActions';
 import LoadingComponent from './LoadingComponent';
+import CCard from '../components/CCard';
 
 
 class BookingContainer extends LoadingComponent {
   constructor(props){
     super(props);
     this.state = {
-      edit: false,
-      buttonName: 'Edit',
+      content: [],
     }
   }
 
-componentWillMount() {
-  this.props.dispatch(fetchBookings())
-}
+  componentWillMount() {
+    this.loadBookingContent();
+  }
+
+  renderContent() {
+    return this.state.content.map(item =>  {
+      return ( 
+        <CCard key={item.id} 
+          handleOnSave={this.saveBookingContent.bind(this)} 
+          handleOnUpdate={this.updateBookingContent.bind(this)} 
+          handleOnDelete={this.deleteParagraph.bind(this)}
+          content={item} 
+        />
+      )
+    });
+  }
 
   render() {
     return(
       <div className="Pages wrapper">
-        <main>
+        <div>
           <ImageUploader />
-          <BookingPage edit={this.state.edit} content={this.props.bookingPageContent} />
-          <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
-        </main>
+          {this.renderContent()}
+        </div>
       </div>
     )
   }
 
-  handleOnClick() {
-    if(this.state.edit){
-      this.setState({
-        edit: false,
-        buttonName: 'Edit'
-      });
-    }else {
-      this.setState({
-        edit: true,
-        buttonName: 'Save'
-      });
+  loadBookingContent() {
+    this.loadContent('bookings', 'GET');
+  }
 
-    }
+  saveBookingContent(item) {
+    this.saveContent('bookings', 'POST', item);
+  }
+
+  updateBookingContent(item) {
+    this.updateContent(`bookings/${item.id}`, 'PUT', item);
+  }
+
+  deleteParagraph(id){
+    this.deleteContent(`bookings/${id}`, 'DELETE');
   }
 }
 
-const mapStateToProps = ({bookingPageContent}) => ({bookingPageContent})
+const mapStateToProps = ({BookingPageContent}) => ({BookingPageContent})
 
 export default connect(mapStateToProps)(BookingContainer);

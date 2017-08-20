@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import ImageUploader from '../components/ImageUploader';
 import LoadingComponent from './LoadingComponent';
-import HomeContent from '../components/HomeContent';
+import CCard from '../components/CCard';
+import NCard from '../components/NCard';
 
 
 class HomeContainer extends LoadingComponent {
@@ -20,11 +21,11 @@ class HomeContainer extends LoadingComponent {
   renderContent() {
     return this.state.content.map(item =>  {
       return ( 
-        <HomeContent key={item.id} 
+        <CCard key={item.id} 
           handleOnSave={this.saveHomeContent.bind(this)} 
           handleOnUpdate={this.updateHomeContent.bind(this)} 
           handleOnDelete={this.deleteParagraph.bind(this)}
-          {...item} 
+          content={item} 
         />
       )
     });
@@ -36,26 +37,33 @@ class HomeContainer extends LoadingComponent {
         <div>
           <ImageUploader />
           {this.renderContent()}
+          {this.state.content.length > 0 ?
+            <NCard 
+              handleOnSave={this.saveHomeContent.bind(this)} 
+              content={this.state.content[0]} 
+            />
+          : 
+            " "
+          }
         </div>
       </div>
     )
   }
 
   loadHomeContent() {
-    let newContent = {heading: 'Add New Header', text: 'Add New Text', new: true};
-    this.loadContent('pages/9/paragraphs', 'GET', newContent);
+    this.loadContent('pages/10/paragraphs', 'GET');
   }
 
   saveHomeContent(item) {
-    this.saveContent('pages/9/paragraphs', 'POST', item);
+    this.saveContent('pages/10/paragraphs', 'POST', item);
   }
 
   updateHomeContent(item) {
-    this.updateContent(`pages/9/paragraphs/${item.id}`, 'PUT', item);
+    this.updateContent(`pages/10/paragraphs/${item.id}`, 'PUT', item);
   }
 
   deleteParagraph(id){
-    this.deleteContent(`pages/9/paragraphs/${id}`, 'DELETE');
+    this.deleteContent(`pages/10/paragraphs/${id}`, 'DELETE');
   }
 }
 
