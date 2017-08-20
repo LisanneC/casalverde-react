@@ -1,30 +1,33 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import ImageUploader from '../components/ImageUploader';
 import LoadingComponent from './LoadingComponent';
 import CCard from '../components/CCard';
 import NCard from '../components/NCard';
 
 
-class HomeContainer extends LoadingComponent {
+export default class HomeContainer extends LoadingComponent {
   constructor(props){
     super(props);
+    
     this.state = {
       content: [],
     }
   }
 
+  getUrl() {
+    return 'pages/10/paragraphs';
+  }
+
   componentWillMount() {
-    this.loadHomeContent();
+    this.loadData();
   }
 
   renderContent() {
     return this.state.content.map(item =>  {
       return ( 
         <CCard key={item.id} 
-          handleOnSave={this.saveHomeContent.bind(this)} 
-          handleOnUpdate={this.updateHomeContent.bind(this)} 
-          handleOnDelete={this.deleteParagraph.bind(this)}
+          handleOnSave={this.saveData.bind(this)} 
+          handleOnUpdate={this.updateData.bind(this)} 
+          handleOnDelete={this.deleteData.bind(this)}
           content={item} 
         />
       )
@@ -35,11 +38,10 @@ class HomeContainer extends LoadingComponent {
     return(
       <div className="Pages wrapper">
         <div>
-          <ImageUploader />
           {this.renderContent()}
           {this.state.content.length > 0 ?
             <NCard 
-              handleOnSave={this.saveHomeContent.bind(this)} 
+              handleOnSave={this.saveData.bind(this)} 
               content={this.state.content[0]} 
             />
           : 
@@ -50,23 +52,20 @@ class HomeContainer extends LoadingComponent {
     )
   }
 
-  loadHomeContent() {
-    this.loadContent('pages/10/paragraphs', 'GET');
+  loadData() {
+    this.loadContent(this.getUrl(), 'GET');
   }
 
-  saveHomeContent(item) {
-    this.saveContent('pages/10/paragraphs', 'POST', item);
+  saveData(item) {
+    this.saveContent(this.getUrl(), 'POST', item);
   }
 
-  updateHomeContent(item) {
-    this.updateContent(`pages/10/paragraphs/${item.id}`, 'PUT', item);
+  updateData(item) {
+    this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
   }
 
-  deleteParagraph(id){
-    this.deleteContent(`pages/10/paragraphs/${id}`, 'DELETE');
+  deleteData(id){
+    this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
   }
 }
 
-const mapStateToProps = ({homePageContent}) => ({homePageContent})
-
-export default connect(mapStateToProps)(HomeContainer);
