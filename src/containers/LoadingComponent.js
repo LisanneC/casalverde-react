@@ -61,7 +61,7 @@ export default class LoadingComponent extends PureComponent {
             this.loadContent(url, 'GET');
         });
     }
-    
+
     updateContent(url, type, item) {
         this.fetch(url, type, item).then((response) => {
             url = url.split('/').slice(0,-1).join('/');

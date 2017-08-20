@@ -6,6 +6,8 @@ import ReviewContainer from './containers/ReviewContainer';
 import PhotoContainer from './containers/PhotoContainer';
 import BookingContainer from './containers/BookingContainer';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import './App.css';
 

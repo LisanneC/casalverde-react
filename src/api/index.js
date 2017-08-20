@@ -51,4 +51,23 @@ export default class API {
       .type('json')
       .accept('json')
   }
+
+
+  update(resource, id, data) {
+    return request
+      .patch(this.resourcePath(resource) +`/${id}`)
+      .send(data)
+      .withCredentials()
+      .type('json')
+      .accept('json')
+  }
+
+  destroy(resource, id) {
+    return request
+      .delete(this.resourcePath(resource) +`/${id}`)
+      .withCredentials()
+      .type('json')
+      .accept('json')
+  }
+
 }
