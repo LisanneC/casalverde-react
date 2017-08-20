@@ -10,11 +10,14 @@ export default class LoadingComponent extends PureComponent {
             .withCredentials()
             .type('json')
             .accept('json');
-        
+
         if (type === 'GET') {
             return request
                 .get(this.resourcePath(resource))
-                
+                .withCredentials()
+                .type('json')
+                .accept('json');
+
         }
         if ( type === 'POST'){
             return request
@@ -39,7 +42,7 @@ export default class LoadingComponent extends PureComponent {
     loadContent(url, type, newContent) {
         this.fetch(url, type).then((response) => {
             if(newContent){
-                response.body.push(newContent);
+              response.body.push(newContent);
             }
             this.setState({content: response.body});
         });
@@ -50,7 +53,7 @@ export default class LoadingComponent extends PureComponent {
             this.loadContent(url, 'GET');
         });
     }
-    
+
     updateContent(url, type, item) {
         this.fetch(url, type, item).then((response) => {
             url = url.split('/').slice(0,-1).join('/');
