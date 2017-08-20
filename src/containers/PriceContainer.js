@@ -1,54 +1,71 @@
-import React, { PureComponent } from 'react';
-import Title from '../components/Title';
-import {connect} from 'react-redux';
-import HomePage from '../components/HomePage';
-import RaisedButton from 'material-ui/RaisedButton';
-import PricePage from '../components/PricePage';
-import ImageUploader from '../components/ImageUploader';
-import { fetchPrices } from '../actions/priceActions';
+import React from 'react';
+import LoadingComponent from './LoadingComponent';
+import CCard from '../components/CCard';
+import NCard from '../components/NCard';
 
 
-class PriceContainer extends PureComponent {
+export default class PriceContainer extends LoadingComponent {
   constructor(props){
     super(props);
+    
     this.state = {
-      edit: false,
-      buttonName: 'Edit',
+      content: [],
     }
   }
 
+  getUrl() {
+    return 'prices';
+  }
+
   componentWillMount() {
-    this.props.dispatch(fetchPrices())
+    this.loadData();
+  }
+
+  renderContent() {
+    return this.state.content.map(item =>  {
+      return ( 
+        <CCard key={item.id} 
+          handleOnSave={this.saveData.bind(this)} 
+          handleOnUpdate={this.updateData.bind(this)} 
+          handleOnDelete={this.deleteData.bind(this)}
+          content={item} 
+        />
+      )
+    });
   }
 
   render() {
     return(
       <div className="Pages wrapper">
-        <main>
-          <ImageUploader />
-          <PricePage edit={this.state.edit} content={this.props.pricePageContent} />
-          <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
-        </main>
+        <div>
+          {this.renderContent()}
+          {this.state.content.length > 0 ?
+            <NCard 
+              handleOnSave={this.saveData.bind(this)} 
+              content={this.state.content[0]} 
+            />
+          : 
+            " "
+          }
+        </div>
       </div>
     )
   }
 
-  handleOnClick() {
-    if(this.state.edit){
-      this.setState({
-        edit: false,
-        buttonName: 'Edit'
-      });
-    }else {
-      this.setState({
-        edit: true,
-        buttonName: 'Save'
-      });
+  loadData() {
+    this.loadContent(this.getUrl(), 'GET');
+  }
 
-    }
+  saveData(item) {
+    this.saveContent(this.getUrl(), 'POST', item);
+  }
+
+  updateData(item) {
+    this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
+  }
+
+  deleteData(id){
+    this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
   }
 }
 
-const mapStateToProps = ({pricePageContent}) => ({pricePageContent})
-
-export default connect(mapStateToProps)(PriceContainer);

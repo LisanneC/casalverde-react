@@ -1,29 +1,33 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import ImageUploader from '../components/ImageUploader';
 import LoadingComponent from './LoadingComponent';
 import CCard from '../components/CCard';
+import NCard from '../components/NCard';
 
 
-class ReviewContainer extends LoadingComponent {
+export default class ReviewContainer extends LoadingComponent {
   constructor(props){
     super(props);
+    
     this.state = {
       content: [],
     }
   }
 
+  getUrl() {
+    return 'reviews';
+  }
+
   componentWillMount() {
-    this.loadReviewContent();
+    this.loadData();
   }
 
   renderContent() {
     return this.state.content.map(item =>  {
       return ( 
         <CCard key={item.id} 
-          handleOnSave={this.saveReviewContent.bind(this)} 
-          handleOnUpdate={this.updateReviewContent.bind(this)} 
-          handleOnDelete={this.deleteParagraph.bind(this)}
+          handleOnSave={this.saveData.bind(this)} 
+          handleOnUpdate={this.updateData.bind(this)} 
+          handleOnDelete={this.deleteData.bind(this)}
           content={item} 
         />
       )
@@ -34,30 +38,34 @@ class ReviewContainer extends LoadingComponent {
     return(
       <div className="Pages wrapper">
         <div>
-          <ImageUploader />
           {this.renderContent()}
+          {this.state.content.length > 0 ?
+            <NCard 
+              handleOnSave={this.saveData.bind(this)} 
+              content={this.state.content[0]} 
+            />
+          : 
+            " "
+          }
         </div>
       </div>
     )
   }
 
-  loadReviewContent() {
-    this.loadContent('reviews', 'GET');
+  loadData() {
+    this.loadContent(this.getUrl(), 'GET');
   }
 
-  saveReviewContent(item) {
-    this.saveContent('reviews', 'POST', item);
+  saveData(item) {
+    this.saveContent(this.getUrl(), 'POST', item);
   }
 
-  updateReviewContent(item) {
-    this.updateContent(`reviews/${item.id}`, 'PUT', item);
+  updateData(item) {
+    this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
   }
 
-  deleteParagraph(id){
-    this.deleteContent(`reviews/${id}`, 'DELETE');
+  deleteData(id){
+    this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
   }
 }
 
-const mapStateToProps = ({ReviewPageContent}) => ({ReviewPageContent})
-
-export default connect(mapStateToProps)(ReviewContainer);
