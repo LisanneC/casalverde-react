@@ -49,11 +49,6 @@ class BottomNavigationExampleSimple extends Component {
             icon={booking}
             onClick={() => this.select(4)}
           />
-          <BottomNavigationItem
-            label="Add a Page"
-            icon={addPage}
-            onClick={() => this.select(5)}
-          />
         </BottomNavigation>
       </Paper>
     );
