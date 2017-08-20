@@ -28,7 +28,7 @@ export default class HomeContainer extends LoadingComponent {
           handleOnSave={this.saveData.bind(this)} 
           handleOnUpdate={this.updateData.bind(this)} 
           handleOnDelete={this.deleteData.bind(this)}
-          title='PARAGRAPH'
+          cardTitle='PARAGRAPH'
           content={item} 
         />
       )
@@ -43,7 +43,7 @@ export default class HomeContainer extends LoadingComponent {
           {this.state.content.length > 0 ?
             <NCard 
               handleOnSave={this.saveData.bind(this)}
-              title='ADD NEW PARAGRAPH' 
+              cardTitle='ADD NEW PARAGRAPH' 
               content={this.state.content[0]} 
             />
           : 
