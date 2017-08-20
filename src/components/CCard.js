@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import TextField from 'material-ui/TextField';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import Divider from 'material-ui/Divider';
 
 
 class CCard extends PureComponent {
@@ -43,12 +44,18 @@ class CCard extends PureComponent {
             if(key !== "id" && key !== "page_id"){
                 if(this.state.edit){
                     return (
-                        <div key={i}>
-                            <TextField fullWidth={true} id="text-field-controlled" value={this.state[key]} onChange={this.handleOnChange.bind(this, key)}/>  
+                        <div key={i} style={{marginTop: '40px', background: '#EEEEEE', padding: '1em 0.53em'}}>
+                            <TextField multiLine={true} fullWidth={true} id="text-field-controlled" value={this.state[key]} onChange={this.handleOnChange.bind(this, key)}/>  
                         </div>
                     )
                 }else {
-                    return <div key={i}>{this.state[key]}</div>;
+                    return (
+                        <div key={i} style={{marginTop: '40px', background: '#EEEEEE', padding: '1em 0.53em'}}>
+                            <h5 style={{textTransform: "uppercase", color: '#9E9E9E'}}> {key}: </h5>
+                            <Divider />
+                            {this.state[key]}
+                        </div>
+                    );
                 }
             }
         })
@@ -57,16 +64,19 @@ class CCard extends PureComponent {
 
     render() {
         return (
-            <Card style={{width: "45vw", display: 'inline-block', margin: '2vw'}}>
+            <Card style={{width: "45vw", display: 'inline-block', margin: '2vw', verticalAlign: 'top'}}>
+                <CardTitle style={{background: '#EF5350', color: '#fff', padding:'1.5em'}}>
+                    {this.props.title}
+                </CardTitle>
                 <CardText>
                     {this.renderContent()}
                 </CardText>
                 <CardActions>
-                    <FlatButton label="Delete" onClick={() => this.props.handleOnDelete(this.props.content.id)} />
+                    <FlatButton label="Delete" primary={true} onClick={() => this.props.handleOnDelete(this.props.content.id)} />
                     {this.state.edit ?
-                        <FlatButton label="Save" onClick={this.handleMode.bind(this)} />
+                        <FlatButton secondary={true} label="SAVE" onClick={this.handleMode.bind(this)} />
                     :
-                        <FlatButton label="Edit" onClick={this.handleMode.bind(this)} />
+                        <FlatButton secondary={true} label="EDIT" onClick={this.handleMode.bind(this)} />
                     }
                 </CardActions>
             </Card>

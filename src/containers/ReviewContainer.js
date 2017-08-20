@@ -28,6 +28,7 @@ export default class ReviewContainer extends LoadingComponent {
           handleOnSave={this.saveData.bind(this)} 
           handleOnUpdate={this.updateData.bind(this)} 
           handleOnDelete={this.deleteData.bind(this)}
+          title="REVIEW"
           content={item} 
         />
       )
@@ -42,6 +43,7 @@ export default class ReviewContainer extends LoadingComponent {
           {this.state.content.length > 0 ?
             <NCard 
               handleOnSave={this.saveData.bind(this)} 
+              title="ADD NEW REVIEW"
               content={this.state.content[0]} 
             />
           : 

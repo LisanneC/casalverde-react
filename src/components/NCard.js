@@ -38,7 +38,7 @@ class NCard extends PureComponent {
         return keys.map((key,i) => {
             if(key !== "id" && key !== "page_id"){
                 return (
-                    <div key={i}>
+                    <div key={i} style={{marginTop: '40px', background: '#EEEEEE', padding: '1em 0.53em'}}>
                         <TextField fullWidth={true} id="text-field-controlled" value={this.state[key]} onChange={this.handleOnChange.bind(this, key)}/>  
                     </div>
                 )
@@ -51,11 +51,14 @@ class NCard extends PureComponent {
         console.log('NCared', this.props, this.state);
         return (
             <Card style={{width: "45vw", display: 'inline-block', margin: '2vw'}}>
+                <CardTitle  style={{background: '#EF5350', color: '#fff', padding:'1.5em'}}>
+                    {this.props.title}
+                </CardTitle>
                 <CardText>
                     {this.renderContent()}
                 </CardText>
                 <CardActions>
-                        <FlatButton label="Save" onClick={this.handleOnSave.bind(this) } />
+                        <FlatButton secondary={true} label="SAVE" onClick={this.handleOnSave.bind(this) } />
                 </CardActions>
             </Card>
         )
