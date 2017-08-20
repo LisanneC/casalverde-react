@@ -1,53 +1,71 @@
-import React, { PureComponent } from 'react';
-import Title from '../components/Title';
-import {connect} from 'react-redux';
-import HomePage from '../components/HomePage';
-import RaisedButton from 'material-ui/RaisedButton';
-import ReviewPage from '../components/ReviewPage';
-import ImageUploader from '../components/ImageUploader';
-import { fetchReviews } from '../actions/reviewActions';
+import React from 'react';
+import LoadingComponent from './LoadingComponent';
+import CCard from '../components/CCard';
+import NCard from '../components/NCard';
 
-class ReviewContainer extends PureComponent {
+
+export default class ReviewContainer extends LoadingComponent {
   constructor(props){
     super(props);
+    
     this.state = {
-      edit: false,
-      buttonName: 'Edit',
+      content: [],
     }
   }
 
+  getUrl() {
+    return 'reviews';
+  }
+
   componentWillMount() {
-    this.props.dispatch(fetchReviews())
+    this.loadData();
+  }
+
+  renderContent() {
+    return this.state.content.map(item =>  {
+      return ( 
+        <CCard key={item.id} 
+          handleOnSave={this.saveData.bind(this)} 
+          handleOnUpdate={this.updateData.bind(this)} 
+          handleOnDelete={this.deleteData.bind(this)}
+          content={item} 
+        />
+      )
+    });
   }
 
   render() {
     return(
       <div className="Pages wrapper">
-        <main>
-          <ReviewPage edit={this.state.edit} content={this.props.reviewPageContent} />
-          <RaisedButton label={this.state.buttonName} primary={true} onClick={this.handleOnClick.bind(this)} />
-          <ImageUploader />
-        </main>
+        <div>
+          {this.renderContent()}
+          {this.state.content.length > 0 ?
+            <NCard 
+              handleOnSave={this.saveData.bind(this)} 
+              content={this.state.content[0]} 
+            />
+          : 
+            " "
+          }
+        </div>
       </div>
     )
   }
 
-  handleOnClick() {
-    if(this.state.edit){
-      this.setState({
-        edit: false,
-        buttonName: 'Edit'
-      });
-    }else {
-      this.setState({
-        edit: true,
-        buttonName: 'Save'
-      });
+  loadData() {
+    this.loadContent(this.getUrl(), 'GET');
+  }
 
-    }
+  saveData(item) {
+    this.saveContent(this.getUrl(), 'POST', item);
+  }
+
+  updateData(item) {
+    this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
+  }
+
+  deleteData(id){
+    this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
   }
 }
 
-const mapStateToProps = ({reviewPageContent}) => ({reviewPageContent})
-
-export default connect(mapStateToProps)(ReviewContainer);

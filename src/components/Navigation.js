@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import FontIcon from 'material-ui/FontIcon';
 import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
 import Paper from 'material-ui/Paper';
 import ActionHome from 'material-ui/svg-icons/action/home';
@@ -49,11 +48,6 @@ class BottomNavigationExampleSimple extends Component {
             label="Bookings"
             icon={booking}
             onClick={() => this.select(4)}
-          />
-          <BottomNavigationItem
-            label="Add a Page"
-            icon={addPage}
-            onClick={() => this.select(5)}
           />
         </BottomNavigation>
       </Paper>
