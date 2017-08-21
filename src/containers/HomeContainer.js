@@ -3,71 +3,68 @@ import LoadingComponent from './LoadingComponent';
 import CCard from '../components/CCard';
 import NCard from '../components/NCard';
 
-
 export default class HomeContainer extends LoadingComponent {
-  constructor(props){
-    super(props);
-    
-    this.state = {
-      content: [],
-    }
-  }
+	constructor(props) {
+		super(props);
 
-  getUrl() {
-    return 'pages/11/paragraphs';
-  }
+		this.state = {
+			content: []
+		};
+	}
 
-  componentWillMount() {
-    this.loadData();
-  }
+	getUrl() {
+		return 'pages/1/paragraphs';
+	}
 
-  renderContent() {
-    return this.state.content.map(item =>  {
-      return ( 
-        <CCard key={item.id} 
-          handleOnSave={this.saveData.bind(this)} 
-          handleOnUpdate={this.updateData.bind(this)} 
-          handleOnDelete={this.deleteData.bind(this)}
-          cardTitle='PARAGRAPH'
-          content={item} 
-        />
-      )
-    });
-  }
+	componentWillMount() {
+		this.loadData();
+	}
 
-  render() {
-    return(
-      <div className="Pages wrapper">
-        <div>
-          {this.renderContent()}
-          {this.state.content.length > 0 ?
-            <NCard 
-              handleOnSave={this.saveData.bind(this)}
-              cardTitle='ADD NEW PARAGRAPH' 
-              content={this.state.content[0]} 
-            />
-          : 
-            " "
-          }
-        </div>
-      </div>
-    )
-  }
+	renderContent() {
+		return this.state.content.map(item => {
+			return (
+				<CCard
+					key={item.id}
+					handleOnSave={this.saveData.bind(this)}
+					handleOnUpdate={this.updateData.bind(this)}
+					handleOnDelete={this.deleteData.bind(this)}
+					cardTitle="PARAGRAPH"
+					content={item}
+				/>
+			);
+		});
+	}
 
-  loadData() {
-    this.loadContent(this.getUrl(), 'GET');
-  }
+	render() {
+		return (
+			<div className="Pages wrapper">
+				<div>
+					{this.renderContent()}
+					{this.state.content.length > 0
+						? <NCard
+								handleOnSave={this.saveData.bind(this)}
+								cardTitle="ADD NEW PARAGRAPH"
+								content={this.state.content[0]}
+							/>
+						: ' '}
+				</div>
+			</div>
+		);
+	}
 
-  saveData(item) {
-    this.saveContent(this.getUrl(), 'POST', item);
-  }
+	loadData() {
+		this.loadContent(this.getUrl(), 'GET');
+	}
 
-  updateData(item) {
-    this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
-  }
+	saveData(item) {
+		this.saveContent(this.getUrl(), 'POST', item);
+	}
 
-  deleteData(id){
-    this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
-  }
+	updateData(item) {
+		this.updateContent(this.getUrl() + '/' + item.id, 'PUT', item);
+	}
+
+	deleteData(id) {
+		this.deleteContent(this.getUrl() + '/' + id, 'DELETE');
+	}
 }
-
