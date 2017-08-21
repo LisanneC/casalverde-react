@@ -46,7 +46,10 @@ export default class LoadingComponent extends PureComponent {
         }
     }
     resourcePath(resource) {
-        const RAILS_HOST = 'http://localhost:5000/admin'
+        const RAILS_HOST = 
+	  process.env.NODE_ENV === 'production'
+            ? 'https://casalverdeitaly.herokuapp.com/admin/'
+            : 'http://localhost:5000/admin'
         return [RAILS_HOST, resource].join('/')
     }
 

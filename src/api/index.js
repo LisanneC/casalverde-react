@@ -15,9 +15,9 @@
 import request from 'superagent';
 
 const RAILS_HOST =
-	process.env !== 'production'
-		? 'http://localhost:5000/admin'
-		: 'https://casalverdeitaly.herokuapp.com/admin'; // <-- note: no trailing slash! :)
+	process.env.NODE_ENV === 'production'
+		? 'https://casalverdeitaly.herokuapp.com/admin'
+		: 'http://localhost:5000/admin';
 
 export default class API {
 	resourcePath(resource) {
